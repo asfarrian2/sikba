@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TahunController;
+use App\Http\Controllers\SeksiController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,7 +17,10 @@ Route::get('/logout', [LoginController::class, 'logout']);
 //Level Akun Admin
 Route::get('/admin/dashboard', [DashboardController::class, 'view']);
 
-//Crud Tahun Anggaran
-Route::get('/admin/tahun/view', [TahunController::class, 'view']);
-Route::post('/admin/tahun/store', [TahunController::class, 'store']);
+//Crud Seksi/Bidang
+Route::get('/admin/seksi', [SeksiController::class, 'view']);
+Route::post('/admin/seksi/store', [SeksiController::class, 'store']);
+Route::post('/admin/seksi/edit', [SeksiController::class, 'edit']);
+Route::post('/admin/seksi/{id_seksi}/update', [SeksiController::class, 'update']);
+Route::get('/admin/seksi/{id_seksi}/status', [SeksiController::class, 'status']);
 

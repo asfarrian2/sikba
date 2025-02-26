@@ -47,7 +47,7 @@
           <div id="" class="pull-left" style="background: #fff;    padding: 5px 10px; border: 1px solid #ccc">
             <i class="fa fa-home"></i>
             <span><a href="/dashboard" style="color: #0a803f">Home</a> /
-                <i class="fa fa-calendar"></i> Tahun Anggaran</span> <b class="caret"></b>
+                <i class="fa fa-calendar"></i> Seksi </span> <b class="caret"></b>
           </div>
         </div>
         <br>
@@ -76,25 +76,29 @@
                         <thead>
                             <tr>
                             <th class="text-center">No.</th>
-                            <th class="text-center">Tahun Anggaran</th>
+                            <th class="text-center">Seksi / Bidang</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tahun as $d)
+                            @foreach ($seksi as $d)
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td class="text-center">{{ $d->thn}}</td>
-                            @if ($d->status_thn == 'Aktif')
+                            <td>{{ $d->nama_seksi}}</td>
+                            @if ($d->status_seksi == '0')
+                            <td class="text-center"> <span class="badge badge-warning" style="font-size: 12px;">Nonaktif</span></td>
+                            @else
                             <td class="text-center"> <span class="badge badge-success" style="font-size: 12px;">Aktif</span></td>
                             @endif
+                            <td class="text-center">
                             @csrf
-                            <td>
-                             @if ($d->status_thn == 'Aktif')
-                             <a class="status" href="#" data-id="{{ $d->id_thn }}" title="Nonaktif"><i class="hapus fa fa-ban text-succsess btn btn-danger btn-sm" ></i></a>
+                             @if ($d->status_seksi == '1')
+                             <a class="status" href="#" data-id="{{ Crypt::encrypt($d->id_seksi) }}" title="Nonaktifkan"><i class="hapus fa fa-ban text-succsess btn btn-secondary btn-sm" ></i></a>
+                             @else
+                             <a class="status" href="#" data-id="{{ Crypt::encrypt($d->id_seksi) }}" title="Aktifkan"><i class="hapus fa fa-check text-succsess btn btn-primary btn-sm" ></i></a>
                              @endif
-                             <a href="/admin/tahun/edit/{{ $d->id_thn }}" title="Edit Data"><i class="fa fa-pencil text-succsess btn btn-warning btn-sm" ></i></a>
-                             <a class="hapus" href="#" data-id="{{ $d->id_thn }}" title="Hapus Data"><i class="hapus fa fa-trash text-succsess btn btn-danger btn-sm" ></i></a>
+                             <a href="#" id_seksi="{{ Crypt::encrypt($d->id_seksi) }}" title="Edit Data" class="edit"><i class="fa fa-pencil text-succsess btn btn-warning btn-sm" ></i></a>
+                             <a class="hapus" href="#" data-id="{{ Crypt::encrypt($d->id_seksi) }}" title="Hapus Data"><i class="hapus fa fa-trash text-succsess btn btn-danger btn-sm" ></i></a>
                             </td>
                             </tr>
                         @endforeach
@@ -104,23 +108,25 @@
                 </div>
               </div>
             </div>
-            <!-- End Begin Tabel -->
+            <!-- End Tabel -->
+
+            <!-- Begin Modal Tambah -->
             <div class="modal modal-blur fade" id="modal-inputobjek" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Tambah Tahun Anggaran</h5>
+                            <h5 class="modal-title">Tambah Seksi / Bidang</h5>
                             <div class="clearfix"></div>
                             <button type="button" class="fa fa-close close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="/admin/tahun/store" method="POST" id="frmCabang">
+                            <form action="/admin/seksi/store" method="POST" id="frmCabang">
                             @csrf
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="input-icon mb-12 col-md-12 col-sm-12">
-                                            <span>Tahun Anggaran:</span>
-                                            <input type="text" pattern="[0-9]*" maxlength="4" name="tahun" class="form-control" placeholder="" required>
+                                            <span>Seksi / Bidang:</span>
+                                            <input type="text" maxlength="75" name="nama_seksi" class="form-control" placeholder="" required>
                                         </div>
                                     </div>
                                 </div>
@@ -139,12 +145,30 @@
                     </div>
                 </div>
             </div>
+            <!-- End Modal Tambah -->
+
+            <!-- begin modal updte SPJ -->
+            <div class="modal modal-blur fade" id="modal-editobjek" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Edit Seksi / Bidang</h5>
+                            <button type="button" class="fa fa-close close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body" id="loadeditform">
+                            {{-- ***Form Edit*** --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end modal updte SPJ -->
         </div>
     </div>
 </div>
 
 
 @endsection
+
 @push('myscript')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -169,14 +193,56 @@
       }
     });
     });
-    </script>
-    <script>
+</script>
 
-        $("#tambah").click(function() {
-           $("#modal-inputobjek").modal("show");
-       });
+<script>
+    $('.status').click(function(){
+        var id_seksi = $(this).attr('data-id');
+    Swal.fire({
+      title: "Apakah Anda Yakin Ingin Mengubah Status Data Ini ?",
+      text: "Jika Ya Maka Status Data Akan Berubah",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, Ubah Saja!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location = "/admin/seksi/"+id_seksi+"/status"
+      }
+    });
+    });
+</script>
 
+<script>
 
-       var span = document.getElementsByClassName("close")[0];
-    </script>
+  $("#tambah").click(function() {
+     $("#modal-inputobjek").modal("show");
+ });
+ var span = document.getElementsByClassName("close")[0];
+</script>
+
+<!-- Button Edit SPJ -->
+<script>
+$('.edit').click(function(){
+    var id_seksi = $(this).attr('id_seksi');
+    $.ajax({
+             type: 'POST',
+             url: '/admin/seksi/edit',
+             cache: false,
+             data: {
+                 _token: "{{ csrf_token() }}",
+                 id_seksi: id_seksi
+             },
+             success: function(respond) {
+                 $("#loadeditform").html(respond);
+             }
+         });
+     $("#modal-editobjek").modal("show");
+
+});
+var span = document.getElementsByClassName("close")[0];
+</script>
+<!-- END Button Edit SPJ -->
+
 @endpush
