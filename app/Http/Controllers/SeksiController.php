@@ -88,6 +88,7 @@ class SeksiController extends Controller
         }
     }
 
+    //Status Data
     public function status($id_seksi)
     {
         $id_seksi   = Crypt::decrypt($id_seksi);

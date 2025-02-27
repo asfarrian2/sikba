@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TahunController;
 use App\Http\Controllers\SeksiController;
+use App\Http\Controllers\KoderekeningController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -24,3 +25,6 @@ Route::post('/admin/seksi/edit', [SeksiController::class, 'edit']);
 Route::post('/admin/seksi/{id_seksi}/update', [SeksiController::class, 'update']);
 Route::get('/admin/seksi/{id_seksi}/status', [SeksiController::class, 'status']);
 
+//Crud Kode Rekening
+Route::get('/admin/koderekening', [KoderekeningController::class, 'view']);
+Route::post('/admin/koderekening/store', [KoderekeningController::class, 'store']);
