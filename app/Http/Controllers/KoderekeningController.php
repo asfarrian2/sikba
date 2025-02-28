@@ -58,5 +58,38 @@ class KoderekeningController extends Controller
        }
    }
 
+    //Edit Data
+    public function edit(Request $request)
+    {
+        $id_koderekening = $request->id_koderekening;
+        $id              = Crypt::decrypt($id_koderekening);
+
+        $koderekening = DB::table('tb_koderekening')
+        ->where('id_koderekening', $id)
+        ->first();
+
+        return view('admin.koderekening.edit', compact('koderekening'));
+    }
+
+    //Update Data
+    public function update($id_koderekening, Request $request)
+    {
+        $id = Crypt::decrypt($id_koderekening);
+        $kode            = $request->kode;
+        $nama            = $request->nama;
+
+        $data = [
+            'kode_rekening' => $kode,
+            'nama_rekening' => $nama
+        ];
+
+        $update = DB::table('tb_koderekening')->where('id_koderekening', $id)->update($data);
+        if ($update) {
+            return Redirect::back()->with(['success' => 'Data Berhasil Di Update.']);
+        } else {
+            return Redirect::back()->with(['warning' => 'Data Gagal Di Update.']);
+        }
+    }
+
 
 }

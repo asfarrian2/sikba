@@ -28,3 +28,5 @@ Route::get('/admin/seksi/{id_seksi}/status', [SeksiController::class, 'status'])
 //Crud Kode Rekening
 Route::get('/admin/koderekening', [KoderekeningController::class, 'view']);
 Route::post('/admin/koderekening/store', [KoderekeningController::class, 'store']);
+Route::post('/admin/koderekening/edit', [KoderekeningController::class, 'edit']);
+Route::post('/admin/koderekening/{id_koderekening}/update', [KoderekeningController::class, 'update']);

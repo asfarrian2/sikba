@@ -78,6 +78,7 @@
                             <th class="text-center">No.</th>
                             <th class="text-center">Kode Rekening</th>
                             <th class="text-center">Nama Rekening</th>
+                            <th class="text-center">Status</th>
                             <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
@@ -85,19 +86,20 @@
                             @foreach ($koderekening as $d)
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $d->kode_rekening}}</td>
-                            @if ($d->nama_rekening == '0')
+                            <td>{{ $d->nama_rekening}}</td>
+                            @if ($d->status_rekening == '0')
                             <td class="text-center"> <span class="badge badge-warning" style="font-size: 12px;">Nonaktif</span></td>
                             @else
                             <td class="text-center"> <span class="badge badge-success" style="font-size: 12px;">Aktif</span></td>
                             @endif
                             <td class="text-center">
                             @csrf
-                             @if ($d->status_seksi == '1')
+                             @if ($d->status_rekening == '1')
                              <a class="status" href="#" data-id="{{ Crypt::encrypt($d->id_koderekening) }}" title="Nonaktifkan"><i class="hapus fa fa-ban text-succsess btn btn-secondary btn-sm" ></i></a>
                              @else
                              <a class="status" href="#" data-id="{{ Crypt::encrypt($d->id_koderekening) }}" title="Aktifkan"><i class="hapus fa fa-check text-succsess btn btn-primary btn-sm" ></i></a>
                              @endif
-                             <a href="#" id_seksi="{{ Crypt::encrypt($d->id_seksi) }}" title="Edit Data" class="edit"><i class="fa fa-pencil text-succsess btn btn-warning btn-sm" ></i></a>
+                             <a href="#" data-id="{{ Crypt::encrypt($d->id_koderekening) }}" title="Edit Data" class="edit"><i class="fa fa-pencil text-succsess btn btn-warning btn-sm" ></i></a>
                              <a class="hapus" href="#" data-id="{{ Crypt::encrypt($d->id_koderekening) }}" title="Hapus Data"><i class="hapus fa fa-trash text-succsess btn btn-danger btn-sm" ></i></a>
                             </td>
                             </tr>
@@ -234,14 +236,14 @@
 <!-- Button Edit SPJ -->
 <script>
 $('.edit').click(function(){
-    var id_seksi = $(this).attr('id_seksi');
+    var id_koderekening = $(this).attr('data-id');
     $.ajax({
              type: 'POST',
-             url: '/admin/seksi/edit',
+             url: '/admin/koderekening/edit',
              cache: false,
              data: {
                  _token: "{{ csrf_token() }}",
-                 id_seksi: id_seksi
+                 id_koderekening: id_koderekening
              },
              success: function(respond) {
                  $("#loadeditform").html(respond);
