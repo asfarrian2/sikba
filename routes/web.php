@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TahunController;
 use App\Http\Controllers\SeksiController;
 use App\Http\Controllers\KoderekeningController;
+use App\Http\Controllers\OperatorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -30,3 +31,8 @@ Route::get('/admin/koderekening', [KoderekeningController::class, 'view']);
 Route::post('/admin/koderekening/store', [KoderekeningController::class, 'store']);
 Route::post('/admin/koderekening/edit', [KoderekeningController::class, 'edit']);
 Route::post('/admin/koderekening/{id_koderekening}/update', [KoderekeningController::class, 'update']);
+Route::get('/admin/koderekening/{id_koderekening}/status', [KoderekeningController::class, 'status']);
+
+//Crud Operator
+Route::get('/admin/operator', [OperatorController::class, 'view']);
+Route::post('/admin/operator/store', [OperatorController::class, 'store']);

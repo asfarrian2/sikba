@@ -4,6 +4,7 @@
     <div class="col-12">
         <div class="input-icon mb-3 col-md-12 col-sm-6">
             <span>Kode Rekening : </span>
+            <input type="hidden" value="{{ $koderekening->kode_lama }}" name="kode" id="kode" class="form-control" required>
             <input type="text" value="{{ $koderekening->kode_rekening }}" name="kode" id="kode" class="form-control" required>
         </div>
     </div>

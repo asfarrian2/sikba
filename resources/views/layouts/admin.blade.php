@@ -59,15 +59,18 @@
               <ul class="nav side-menu">
                 <li><a href="/admin/dashboard"><i class="fa fa-tachometer"></i>Dashboard</a></li>
                 <br> <h3>MASTER</h3> <br>
-                <li><a><i class="fa fa-tasks"></i> Data <span class="fa fa-chevron-down"></span></a>
+                <li><a><i class="fa fa-tasks"></i> Manage Data <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
-                    <li><a href="/admin/seksi">Seksi</a></li>
+                    <li><a href="/admin/seksi">Seksi / Bidang</a></li>
                     <li><a href="/admin/koderekening">Kode Rekening</a></li>
-                    <li><a href="/pejabatpelaksana/view">Seksi / Bidang</a></li>
-                    <li><a href="/penyedia/view">Penyedia</a></li>
-                    <li><a href="/user/view">User</a></li>
                   </ul>
                 </li>
+                <li><a><i class="fa fa-user"></i> Manage Akun <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/admin/operator">Operator</a></li>
+                      <li><a href="/admin/user">User</a></li>
+                    </ul>
+                  </li>
                 <li><a><i class="fa fa-database"></i> Anggaran <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="/program/view">Progam</a></li>

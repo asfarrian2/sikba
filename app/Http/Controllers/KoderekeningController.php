@@ -41,9 +41,16 @@ class KoderekeningController extends Controller
        }
        $id=$kodeobjek.$nomorurut;
 
-       $kode_rekening = $request->kode_rekening;
-       $nama_rekening = $request->nama_rekening;
+       $kode_rekening = $request->kode;
+       $nama_rekening = $request->nama;
 
+       $cekkode = DB::table('tb_koderekening')
+       ->where('kode_rekening', '=', $kode_rekening)
+       ->count();
+        if ($cekkode > 0) {
+       return Redirect::back()->with(['warning' => 'Kode Rekening Sudah Digunakan']);
+        }
+       else {
        $data = [
            'id_koderekening'     => $id,
            'kode_rekening'       => $kode_rekening,
@@ -56,7 +63,9 @@ class KoderekeningController extends Controller
        } else {
            return Redirect::back()->with(['warning' => 'Data Gagal Disimpan.']);
        }
+     }
    }
+
 
     //Edit Data
     public function edit(Request $request)
@@ -71,12 +80,13 @@ class KoderekeningController extends Controller
         return view('admin.koderekening.edit', compact('koderekening'));
     }
 
+
     //Update Data
     public function update($id_koderekening, Request $request)
     {
-        $id = Crypt::decrypt($id_koderekening);
-        $kode            = $request->kode;
-        $nama            = $request->nama;
+        $id     = Crypt::decrypt($id_koderekening);
+        $kode   = $request->kode;
+        $nama   = $request->nama;
 
         $data = [
             'kode_rekening' => $kode,
@@ -90,6 +100,46 @@ class KoderekeningController extends Controller
             return Redirect::back()->with(['warning' => 'Data Gagal Di Update.']);
         }
     }
+
+
+    //Status Data
+    public function status($id_koderekening)
+    {
+        $id_koderekening   = Crypt::decrypt($id_koderekening);
+
+        $data = DB::table('tb_koderekening')
+        ->where('id_koderekening', $id_koderekening)
+        ->first();
+
+        $status_rekening = $data->status_rekening;
+
+        $aktif = [
+            'status_rekening' => '1',
+        ];
+
+        $nonaktif = [
+            'status_rekening' => '0',
+        ];
+
+        if($status_rekening == '0'){
+            $update = DB::table('tb_koderekening')->where('id_koderekening', $id_koderekening)->update($aktif);
+            if ($update) {
+                return Redirect::back()->with(['success' => 'Data Berhasil Diaktifkan.']);
+            } else {
+                return Redirect::back()->with(['warning' => 'Data Gagal Diaktifkan.']);
+            }
+
+        }else{
+            $update = DB::table('tb_koderekening')->where('id_koderekening', $id_koderekening)->update($nonaktif);
+            if ($update) {
+                return Redirect::back()->with(['success' => 'Data Berhasil Dinonaktifkan.']);
+            } else {
+                return Redirect::back()->with(['warning' => 'Data Gagal Dinonaktifkan.']);
+            }
+        }
+
+    }
+
 
 
 }

@@ -40,14 +40,14 @@
 <div class="col-md-12 col-sm-12 ">
     <div class="x_panel">
         <div class="x_title">
-            <h2>T.A. 2025<small>Kode Rekening</small></h2>
+            <h2>T.A. 2025<small>Akun Operator</small></h2>
             <div class="clearfix"></div>
         </div>
         <div class="col-md-4">
           <div id="" class="pull-left" style="background: #fff;    padding: 5px 10px; border: 1px solid #ccc">
             <i class="fa fa-home"></i>
             <span><a href="/dashboard" style="color: #0a803f">Home</a> /
-                <i class="fa fa-list-ol"></i> Kode Rekening </span> <b class="caret"></b>
+                <i class="fa fa-user"></i> Operator </span> <b class="caret"></b>
           </div>
         </div>
         <br>
@@ -76,34 +76,36 @@
                         <thead>
                             <tr>
                             <th class="text-center">No.</th>
-                            <th class="text-center">Kode Rekening</th>
-                            <th class="text-center">Nama Rekening</th>
+                            <th class="text-center">Nama Lengkap</th>
+                            <th class="text-center">Username</th>
+                            <th class="text-center">Seksi</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($koderekening as $d)
+                            @foreach ($view as $d)
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $d->kode_rekening}}</td>
-                            <td>{{ $d->nama_rekening}}</td>
-                            @if ($d->status_rekening == '0')
+                            <td>{{ $d->nama_opt}}</td>
+                            <td>{{ $d->username}}</td>
+                            <td>{{ $d->nama_seksi}}</td>
+                            @if ($d->status_opt == '0')
                             <td class="text-center"> <span class="badge badge-warning" style="font-size: 12px;">Nonaktif</span></td>
                             @else
                             <td class="text-center"> <span class="badge badge-success" style="font-size: 12px;">Aktif</span></td>
                             @endif
                             <td class="text-center">
                             @csrf
-                             @if ($d->status_rekening == '1')
-                             <a class="status" href="#" data-id="{{ Crypt::encrypt($d->id_koderekening) }}" title="Nonaktifkan"><i class="hapus fa fa-ban text-succsess btn btn-secondary btn-sm" ></i></a>
+                             @if ($d->status_opt == '1')
+                             <a class="status" href="#" data-id="{{ Crypt::encrypt($d->id_seksi) }}" title="Nonaktifkan"><i class="hapus fa fa-ban text-succsess btn btn-secondary btn-sm" ></i></a>
                              @else
-                             <a class="status" href="#" data-id="{{ Crypt::encrypt($d->id_koderekening) }}" title="Aktifkan"><i class="hapus fa fa-check text-succsess btn btn-primary btn-sm" ></i></a>
+                             <a class="status" href="#" data-id="{{ Crypt::encrypt($d->id_seksi) }}" title="Aktifkan"><i class="hapus fa fa-check text-succsess btn btn-primary btn-sm" ></i></a>
                              @endif
-                             <a href="#" data-id="{{ Crypt::encrypt($d->id_koderekening) }}" title="Edit Data" class="edit"><i class="fa fa-pencil text-succsess btn btn-warning btn-sm" ></i></a>
-                             <a class="hapus" href="#" data-id="{{ Crypt::encrypt($d->id_koderekening) }}" title="Hapus Data"><i class="hapus fa fa-trash text-succsess btn btn-danger btn-sm" ></i></a>
+                             <a href="#" id_seksi="{{ Crypt::encrypt($d->id_seksi) }}" title="Edit Data" class="edit"><i class="fa fa-pencil text-succsess btn btn-warning btn-sm" ></i></a>
+                             <a class="hapus" href="#" data-id="{{ Crypt::encrypt($d->id_seksi) }}" title="Hapus Data"><i class="hapus fa fa-trash text-succsess btn btn-danger btn-sm" ></i></a>
                             </td>
                             </tr>
-                            @endforeach
+                        @endforeach
                       </tbody>
                     </table>
                   </div>
@@ -117,18 +119,18 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Tambah Kode Rekening</h5>
+                            <h5 class="modal-title">Tambah Operator</h5>
                             <div class="clearfix"></div>
                             <button type="button" class="fa fa-close close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="/admin/koderekening/store" method="POST" id="frmCabang">
+                            <form action="/admin/operator/store" method="POST" id="frmCabang">
                             @csrf
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="input-icon mb-12 col-md-12 col-sm-12">
-                                            <span>Kode Rekening:</span>
-                                            <input type="text" pattern="[0-9\.]+" maxlength="17" name="kode" class="form-control" placeholder="" required>
+                                            <span>Nama Lengkap :</span>
+                                            <input type="text" maxlength="120" name="nama" class="form-control" placeholder="" required>
                                         </div>
                                     </div>
                                 </div>
@@ -136,8 +138,22 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="input-icon mb-12 col-md-12 col-sm-12">
-                                            <span>Nama Rekening:</span>
-                                            <input type="text"  name="nama" class="form-control" placeholder="" required>
+                                            <span>Username :</span>
+                                            <input type="text" maxlength="35" name="username" class="form-control" placeholder="" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"><br></div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-icon mb-12 col-md-12 col-sm-12">
+                                            <span>Seksi / Bidang :</span>
+                                            <select name="seksi" id="seksi" class="form-control" required="required">
+                                                <option value="">Pilih Seksi / Bidang</option>
+                                                @foreach ($seksi as $d)
+                                                <option value="{{ $d->id_seksi }}"> {{$d->nama_seksi }} </option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -158,12 +174,12 @@
             </div>
             <!-- End Modal Tambah -->
 
-            <!-- begin modal updte -->
+            <!-- begin modal updte SPJ -->
             <div class="modal modal-blur fade" id="modal-editobjek" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Edit Kode Rekening</h5>
+                            <h5 class="modal-title">Edit Seksi / Bidang</h5>
                             <button type="button" class="fa fa-close close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body" id="loadeditform">
@@ -172,7 +188,7 @@
                     </div>
                 </div>
             </div>
-            <!-- end modal updte  -->
+            <!-- end modal updte SPJ -->
         </div>
     </div>
 </div>
@@ -206,7 +222,6 @@
     });
 </script>
 
-
 <script>
     $('.status').click(function(){
         var id_seksi = $(this).attr('data-id');
@@ -220,7 +235,7 @@
       confirmButtonText: "Ya, Ubah Saja!"
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location = "/admin/koderekening/"+id_seksi+"/status"
+        window.location = "/admin/seksi/"+id_seksi+"/status"
       }
     });
     });
@@ -234,18 +249,17 @@
  var span = document.getElementsByClassName("close")[0];
 </script>
 
-
 <!-- Button Edit SPJ -->
 <script>
 $('.edit').click(function(){
-    var id_koderekening = $(this).attr('data-id');
+    var id_seksi = $(this).attr('id_seksi');
     $.ajax({
              type: 'POST',
-             url: '/admin/koderekening/edit',
+             url: '/admin/seksi/edit',
              cache: false,
              data: {
                  _token: "{{ csrf_token() }}",
-                 id_koderekening: id_koderekening
+                 id_seksi: id_seksi
              },
              success: function(respond) {
                  $("#loadeditform").html(respond);
