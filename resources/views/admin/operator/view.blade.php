@@ -97,12 +97,13 @@
                             <td class="text-center">
                             @csrf
                              @if ($d->status_opt == '1')
-                             <a class="status" href="#" data-id="{{ Crypt::encrypt($d->id_seksi) }}" title="Nonaktifkan"><i class="hapus fa fa-ban text-succsess btn btn-secondary btn-sm" ></i></a>
+                             <a class="status" href="#" data-id="{{ Crypt::encrypt($d->id_opt) }}" title="Nonaktifkan"><i class="hapus fa fa-ban text-succsess btn btn-secondary btn-sm" ></i></a>
                              @else
-                             <a class="status" href="#" data-id="{{ Crypt::encrypt($d->id_seksi) }}" title="Aktifkan"><i class="hapus fa fa-check text-succsess btn btn-primary btn-sm" ></i></a>
+                             <a class="status" href="#" data-id="{{ Crypt::encrypt($d->id_opt) }}" title="Aktifkan"><i class="hapus fa fa-check text-succsess btn btn-primary btn-sm" ></i></a>
                              @endif
-                             <a href="#" id_seksi="{{ Crypt::encrypt($d->id_seksi) }}" title="Edit Data" class="edit"><i class="fa fa-pencil text-succsess btn btn-warning btn-sm" ></i></a>
-                             <a class="hapus" href="#" data-id="{{ Crypt::encrypt($d->id_seksi) }}" title="Hapus Data"><i class="hapus fa fa-trash text-succsess btn btn-danger btn-sm" ></i></a>
+                             <a href="#" data-id="{{ Crypt::encrypt($d->id_opt) }}" title="Edit Data" class="edit"><i class="fa fa-pencil text-succsess btn btn-warning btn-sm" ></i></a>
+                             <a class="reset" href="#" data-id="{{ Crypt::encrypt($d->id_opt) }}" title="Reset Password"><i class="hapus fa fa-key text-succsess btn btn-primary btn-sm" ></i></a>
+                             <a class="hapus" href="#" data-id="{{ Crypt::encrypt($d->id_opt) }}" title="Hapus Data"><i class="hapus fa fa-trash text-succsess btn btn-danger btn-sm" ></i></a>
                             </td>
                             </tr>
                         @endforeach
@@ -252,14 +253,14 @@
 <!-- Button Edit SPJ -->
 <script>
 $('.edit').click(function(){
-    var id_seksi = $(this).attr('id_seksi');
+    var id_opt = $(this).attr('data-id');
     $.ajax({
              type: 'POST',
-             url: '/admin/seksi/edit',
+             url: '/admin/operator/edit',
              cache: false,
              data: {
                  _token: "{{ csrf_token() }}",
-                 id_seksi: id_seksi
+                 id_opt: id_opt
              },
              success: function(respond) {
                  $("#loadeditform").html(respond);
@@ -271,5 +272,26 @@ $('.edit').click(function(){
 var span = document.getElementsByClassName("close")[0];
 </script>
 <!-- END Button Edit SPJ -->
+
+{{-- Reset Password --}}
+<script>
+    $('.reset').click(function(){
+        var id_opt = $(this).attr('data-id');
+    Swal.fire({
+      title: "Apakah Anda Yakin Ingin Melakukan Reset Password Pada Akun Ini ?",
+      text: "Jika Ya Maka Password Akun Akan Direset",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, Reset Saja!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location = "/admin/operator/"+id_opt+"/resetpassword"
+      }
+    });
+    });
+</script>
+{{-- Reset Password --}}
 
 @endpush

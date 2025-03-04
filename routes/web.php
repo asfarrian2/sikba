@@ -36,3 +36,6 @@ Route::get('/admin/koderekening/{id_koderekening}/status', [KoderekeningControll
 //Crud Operator
 Route::get('/admin/operator', [OperatorController::class, 'view']);
 Route::post('/admin/operator/store', [OperatorController::class, 'store']);
+Route::post('/admin/operator/edit', [OperatorController::class, 'edit']);
+Route::post('/admin/operator/{id_opt}/update', [OperatorController::class, 'update']);
+Route::get('/admin/operator/{id_opt}/resetpassword', [OperatorController::class, 'reset']);

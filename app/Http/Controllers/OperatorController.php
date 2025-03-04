@@ -70,5 +70,68 @@ class OperatorController extends Controller
     }
 
 
+    //Edit Data
+    public function edit(Request $request)
+    {
+        $id_opt = $request->id_opt;
+        $id = Crypt::decrypt($id_opt);
+
+        $operator = DB::table('tb_operator')
+        ->where('id_opt', $id)
+        ->first();
+        return view('admin.operator.edit', compact('id_opt','operator'));
+
+    }
+
+    //Update Data
+    public function update($id_opt, Request $request)
+    {
+        $id_opt   = Crypt::decrypt($id_opt);
+
+        $nama     = $request->nama;
+        $username = $request->username;
+
+        $data = [
+            'nama_opt' => $nama,
+            'username' => $username
+
+        ];
+
+        $update = DB::table('tb_operator')->where('id_opt', $id_opt)->update($data);
+        if ($update) {
+            return Redirect::back()->with(['success' => 'Data Berhasil Di Update.']);
+        } else {
+            return Redirect::back()->with(['warning' => 'Data Gagal Di Update.']);
+        }
+    }
+
+
+    //Reset Password
+    public function reset($id_opt)
+    {
+        $id_opt   = Crypt::decrypt($id_opt);
+
+        $operator = DB::table('tb_operator')
+        ->where('id_opt', $id_opt)
+        ->first();
+
+        $username    = $operator->username;
+
+        $password    = Hash::make($username.'2000');
+
+        $data = [
+            'password' => $password
+        ];
+
+        $update = DB::table('tb_operator')->where('id_opt', $id_opt)->update($data);
+        if ($update) {
+            return Redirect::back()->with(['success' => 'Reset Password Berhasil.']);
+        } else {
+            return Redirect::back()->with(['warning' => 'Reset Password Gagal.']);
+        }
+    }
+
+
+
 
 }
