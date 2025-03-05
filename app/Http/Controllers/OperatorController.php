@@ -43,7 +43,7 @@ class OperatorController extends Controller
         if($operator == null){
             $nomorurut = "001";
         }else{
-            $nomorurut = substr($operator->operator, 4, 3) + 1;
+            $nomorurut = substr($operator->id_opt, 4, 3) + 1;
             $nomorurut = str_pad($nomorurut, 3, "0", STR_PAD_LEFT);
         }
         $id=$kodeobjek.$nomorurut;
@@ -103,6 +103,44 @@ class OperatorController extends Controller
         } else {
             return Redirect::back()->with(['warning' => 'Data Gagal Di Update.']);
         }
+    }
+
+    //Status
+    public function status($id_opt)
+    {
+        $id_opt   = Crypt::decrypt($id_opt);
+
+        $operator = DB::table('tb_operator')
+        ->where('id_opt', $id_opt)
+        ->first();
+
+        $status_opt    = $operator->status_opt;
+
+        $aktif = [
+            'status_opt' => '1',
+        ];
+
+        $nonaktif = [
+            'status_opt' => '0',
+        ];
+
+        if($status_opt == '0'){
+            $update = DB::table('tb_operator')->where('id_opt', $id_opt)->update($aktif);
+            if ($update) {
+                return Redirect::back()->with(['success' => 'Data Berhasil Diaktifkan.']);
+            } else {
+                return Redirect::back()->with(['warning' => 'Data Gagal Diaktifkan.']);
+            }
+
+        }else{
+            $update = DB::table('tb_operator')->where('id_opt', $id_opt)->update($nonaktif);
+            if ($update) {
+                return Redirect::back()->with(['success' => 'Data Berhasil Dinonaktifkan.']);
+            } else {
+                return Redirect::back()->with(['warning' => 'Data Gagal Dinonaktifkan.']);
+            }
+        }
+
     }
 
 

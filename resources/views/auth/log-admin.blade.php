@@ -47,6 +47,14 @@
                 <input name="password" type="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
+                <select name="seksi" id="seksi" class="form-control" required="required">
+                    <option value="">Pilih Seksi / Bidang</option>
+                    @foreach ($seksi as $d)
+                    <option value="{{ $d->id_seksi }}"> {{$d->nama_seksi }} </option>
+                    @endforeach
+                </select>
+              </div>
+              <div>
                 <button class="btn btn-success submit" type="submit" >LOGIN</button>
               </div>
 
@@ -54,8 +62,6 @@
 
               <div class="separator">
                 <div class="clearfix"></div>
-
-
                 <div>
                   <h1><i class="fa fa-calculator"></i> SIKBA</h1>
                   <p>©2025 All Rights Reserved. Sistem Informasi Keuangan Balai Pelatihan Koperasi dan Usaha Kecil <br> Prov. Kalimantan Selatan</p>

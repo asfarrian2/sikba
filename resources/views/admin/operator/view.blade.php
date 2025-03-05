@@ -225,7 +225,7 @@
 
 <script>
     $('.status').click(function(){
-        var id_seksi = $(this).attr('data-id');
+        var id_opt = $(this).attr('data-id');
     Swal.fire({
       title: "Apakah Anda Yakin Ingin Mengubah Status Data Ini ?",
       text: "Jika Ya Maka Status Data Akan Berubah",
@@ -236,7 +236,7 @@
       confirmButtonText: "Ya, Ubah Saja!"
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location = "/admin/seksi/"+id_seksi+"/status"
+        window.location = "/admin/operator/"+id_opt+"/status"
       }
     });
     });

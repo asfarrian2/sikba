@@ -39,3 +39,4 @@ Route::post('/admin/operator/store', [OperatorController::class, 'store']);
 Route::post('/admin/operator/edit', [OperatorController::class, 'edit']);
 Route::post('/admin/operator/{id_opt}/update', [OperatorController::class, 'update']);
 Route::get('/admin/operator/{id_opt}/resetpassword', [OperatorController::class, 'reset']);
+Route::get('/admin/operator/{id_opt}/status', [OperatorController::class, 'status']);

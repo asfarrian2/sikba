@@ -65,19 +65,19 @@
                     <li><a href="/admin/koderekening">Kode Rekening</a></li>
                   </ul>
                 </li>
+                <li><a><i class="fa fa-database"></i> Anggaran <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="/program/view">Progam</a></li>
+                      <li><a href="/kegiatan/view">Kegiatan</a></li>
+                      <li><a href="/sub_kegiatan/view">Sub Kegiatan</a></li>
+                    </ul>
+                  </li>
                 <li><a><i class="fa fa-user"></i> Manage Akun <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="/admin/operator">Operator</a></li>
                       <li><a href="/admin/user">User</a></li>
                     </ul>
                   </li>
-                <li><a><i class="fa fa-database"></i> Anggaran <span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu">
-                    <li><a href="/program/view">Progam</a></li>
-                    <li><a href="/kegiatan/view">Kegiatan</a></li>
-                    <li><a href="/sub_kegiatan/view">Sub Kegiatan</a></li>
-                  </ul>
-                </li>
                 <br> <h3>TRANSAKSI</h3> <br>
                 <li><a><i class="fa fa-credit-card"></i> KREDIT <span class="fa fa-chevron-down"></span></a>
                   <ul class="nav child_menu">
