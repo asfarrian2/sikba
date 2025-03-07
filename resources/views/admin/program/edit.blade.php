@@ -1,11 +1,11 @@
-<form action="/admin/koderekening/{{Crypt::encrypt($koderekening->id_koderekening)}}/update" method="POST" id="frmEdit" enctype="multipart/form-data">
+<form action="/admin/program/{{Crypt::encrypt($program->id_program)}}/update" method="POST" id="frmEdit" enctype="multipart/form-data">
  @csrf
 <div class="row">
     <div class="col-12">
         <div class="input-icon mb-3 col-md-12 col-sm-6">
             <span>Kode Rekening : </span>
-            <input type="hidden" value="{{ $koderekening->kode_rekening }}" name="kode_lama" id="kode_lama" class="form-control" required>
-            <input type="text" value="{{ $koderekening->kode_rekening }}" name="kode" id="kode" class="form-control" required>
+            <input type="hidden" value="{{ $program->kode_program }}" name="kode" id="kode" class="form-control" required>
+            <input type="text" value="{{ $program->kode_program }}" name="kode_baru" id="kode_baru" class="form-control" required>
         </div>
     </div>
 </div>
@@ -13,7 +13,7 @@
     <div class="col-12">
         <div class="input-icon mb-3 col-md-12 col-sm-6">
             <span>Nama Rekening : </span>
-            <input type="text" value="{{ $koderekening->nama_rekening }}" name="nama" id="nama" class="form-control" required>
+            <input type="text" value="{{ $program->nama_program }}" name="nama" id="nama" class="form-control" required>
         </div>
     </div>
 </div>

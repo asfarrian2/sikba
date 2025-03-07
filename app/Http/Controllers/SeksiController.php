@@ -65,7 +65,7 @@ class SeksiController extends Controller
         $seksi = DB::table('tb_seksi')
         ->where('id_seksi', $id)
         ->first();
-        return view('admin.seksi.edit', compact('id_seksi','seksi'));
+        return view('admin.seksi.edit', compact('seksi'));
 
     }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\TahunController;
 use App\Http\Controllers\SeksiController;
 use App\Http\Controllers\KoderekeningController;
 use App\Http\Controllers\OperatorController;
+use App\Http\Controllers\ProgramController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -40,3 +41,13 @@ Route::post('/admin/operator/edit', [OperatorController::class, 'edit']);
 Route::post('/admin/operator/{id_opt}/update', [OperatorController::class, 'update']);
 Route::get('/admin/operator/{id_opt}/resetpassword', [OperatorController::class, 'reset']);
 Route::get('/admin/operator/{id_opt}/status', [OperatorController::class, 'status']);
+
+//Crud Program
+Route::get('/admin/program', [ProgramController::class, 'view']);
+Route::post('/admin/program/store', [ProgramController::class, 'store']);
+Route::post('/admin/program/edit', [ProgramController::class, 'edit']);
+Route::post('/admin/program/{id_program}/update', [ProgramController::class, 'update']);
+Route::get('/admin/program/{id_program}/status', [ProgramController::class, 'status']);
+
+//Crud Program
+Route::get('/admin/program', [ProgramController::class, 'view']);
