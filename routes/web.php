@@ -7,6 +7,7 @@ use App\Http\Controllers\SeksiController;
 use App\Http\Controllers\KoderekeningController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\KegiatanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -49,5 +50,6 @@ Route::post('/admin/program/edit', [ProgramController::class, 'edit']);
 Route::post('/admin/program/{id_program}/update', [ProgramController::class, 'update']);
 Route::get('/admin/program/{id_program}/status', [ProgramController::class, 'status']);
 
-//Crud Program
-Route::get('/admin/program', [ProgramController::class, 'view']);
+//Crud Kegiatan
+Route::get('/admin/kegiatan', [KegiatanController::class, 'view']);
+

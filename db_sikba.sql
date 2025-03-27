@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2025 at 01:30 PM
+-- Generation Time: Mar 07, 2025 at 08:24 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -169,7 +169,78 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('tcJljmzStRgWLMICSVo9J093ti12pgkvDX5KWoiB', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiMVZwMzF6TUtUV3RpeEF3QndlVG1UdnN6dWJQcXA4M0FsenBGbkl2QyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9zZWtzaSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1740572979);
+('DDDlsxcYymCaAyIhARF9F1eZsJE9X59xpsdAtVL7', 140500001, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoibU0zT2ozSzZINTJhNDZRcjZJcnU4ZEhVY1Nnb2pVclI0cjljcjNNdyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9wcm9ncmFtIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTQwNTAwMDAxO30=', 1741322005);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_koderekening`
+--
+
+CREATE TABLE `tb_koderekening` (
+  `id_koderekening` varchar(15) NOT NULL,
+  `kode_rekening` varchar(17) NOT NULL,
+  `nama_rekening` varchar(150) NOT NULL,
+  `status_rekening` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_koderekening`
+--
+
+INSERT INTO `tb_koderekening` (`id_koderekening`, `kode_rekening`, `nama_rekening`, `status_rekening`) VALUES
+('KR-0001', '5.1.02.01.01.0024', 'Belanja Alat/Bahan untuk Kegiatan Kantor-Alat Tulis Kantor', 1),
+('KR-0002', '5.1.02.01.01.0025', 'Belanja Alat/Bahan untuk Kegiatan Kantor- Kertas dan Cover', 1),
+('KR-0003', '5.1.02.01.01.0026', 'Belanja Alat/Bahan untuk Kegiatan Kantor- Bahan Cetak', 1),
+('KR-0004', '5.1.02.01.01.0029', 'Belanja Alat/Bahan untuk Kegiatan Kantor-Bahan Komputer', 1),
+('KR-0005', '5.1.02.01.01.0052', 'Belanja Makanan dan Minuman Rapat', 1),
+('KR-0006', '5.1.02.04.01.0001', 'Belanja Perjalanan Dinas Biasa', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_operator`
+--
+
+CREATE TABLE `tb_operator` (
+  `id_opt` varchar(8) NOT NULL,
+  `nama_opt` varchar(100) NOT NULL,
+  `username` varchar(35) NOT NULL,
+  `password` text NOT NULL,
+  `status_opt` int(1) NOT NULL,
+  `id_seksi` varchar(15) NOT NULL,
+  `ta` int(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_operator`
+--
+
+INSERT INTO `tb_operator` (`id_opt`, `nama_opt`, `username`, `password`, `status_opt`, `id_seksi`, `ta`) VALUES
+('opt-001', 'Budi Rahmadi Akbar, S.Pd', 'budibalatkop', '$2y$12$cY4LtC4UQ4aIy3m376UNheSNYZ3cDgonwG0jOG3XRVarnk3oXlB9i', 1, 'SE-001', NULL),
+('opt-002', 'Ka Kiki', 'kikibalatkop', '$2y$12$HK9zjpSSAdnqC9hrxx73eu.5MaLpCKSOMCDZmVgNASgn0/DhcFgy2', 1, 'SE-002', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_program`
+--
+
+CREATE TABLE `tb_program` (
+  `id_program` varchar(15) NOT NULL,
+  `kode_program` varchar(7) NOT NULL,
+  `nama_program` varchar(150) NOT NULL,
+  `status_program` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tb_program`
+--
+
+INSERT INTO `tb_program` (`id_program`, `kode_program`, `nama_program`, `status_program`) VALUES
+('PR-0001', '2.17.01', 'Program Penunjang Urusan Pemerintahan Daerah Provinsi', 1),
+('PR-0002', '2.17.05', 'Program Pendidikan Dan Latihan Perkoperasian', 1),
+('PR-0003', '2.17.07', 'Program Pemberdayaan Usaha Menengah, Usaha Kecil, Dan Usaha Mikro (UMKM)', 1);
 
 -- --------------------------------------------------------
 
@@ -188,7 +259,7 @@ CREATE TABLE `tb_seksi` (
 --
 
 INSERT INTO `tb_seksi` (`id_seksi`, `nama_seksi`, `status_seksi`) VALUES
-('S-001', 'Sub Bagian Tata Usaha', 1),
+('SE-001', 'Sub Bagian Tata Usaha', 1),
 ('SE-002', 'Seksi Pendidikan dan Pelatihan SDM Koperasi', 1),
 ('SE-003', 'Seksi Pendidikan dan Pelatihan SDM Usaha Kecil', 1);
 
@@ -271,6 +342,18 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `tb_operator`
+--
+ALTER TABLE `tb_operator`
+  ADD PRIMARY KEY (`id_opt`);
+
+--
+-- Indexes for table `tb_program`
+--
+ALTER TABLE `tb_program`
+  ADD PRIMARY KEY (`id_program`);
 
 --
 -- Indexes for table `tb_seksi`
