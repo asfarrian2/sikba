@@ -64,7 +64,6 @@
                     <li><a href="/admin/seksi">Seksi / Bidang</a></li>
                     <li><a href="/admin/program">Program</a></li>
                     <li><a href="/admin/kegiatan">Kegiatan</a></li>
-                    <li><a href="/admin/subkegiatan">Sub Kegiatan</a></li>
                     <li><a href="/admin/koderekening">Kode Rekening</a></li>
                   </ul>
                 </li>

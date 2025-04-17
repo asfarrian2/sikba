@@ -8,6 +8,7 @@ use App\Http\Controllers\KoderekeningController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\KegiatanController;
+use App\Http\Controllers\SubkegiatanController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -49,7 +50,18 @@ Route::post('/admin/program/store', [ProgramController::class, 'store']);
 Route::post('/admin/program/edit', [ProgramController::class, 'edit']);
 Route::post('/admin/program/{id_program}/update', [ProgramController::class, 'update']);
 Route::get('/admin/program/{id_program}/status', [ProgramController::class, 'status']);
+Route::get('/admin/program/{id_program}/hapus', [ProgramController::class, 'hapus']);
 
 //Crud Kegiatan
 Route::get('/admin/kegiatan', [KegiatanController::class, 'view']);
+Route::post('/admin/kegiatan/store', [KegiatanController::class, 'store']);
+Route::post('/admin/kegiatan/edit', [KegiatanController::class, 'edit']);
+Route::post('/admin/kegiatan/{id_keg}/update', [KegiatanController::class, 'update']);
+Route::get('/admin/kegiatan/{id_keg}/status', [KegiatanController::class, 'status']);
+Route::get('/admin/kegiatan/{id_keg}/hapus', [KegiatanController::class, 'hapus']);
 
+//Crud Sub Keg
+Route::get('/admin/kegiatan/sub{id_keg}', [SubkegiatanController::class, 'view']);
+Route::post('/admin/subkeg/store', [SubkegiatanController::class, 'store']);
+Route::post('/admin/subkeg/edit', [SubkegiatanController::class, 'edit']);
+Route::post('/admin/subkeg/{id_subkeg}/update', [SubkegiatanController::class, 'update']);

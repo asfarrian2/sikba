@@ -151,6 +151,26 @@ class ProgramController extends Controller
 
     }
 
+     //Hapus Data
+     public function hapus($id_program)
+     {
+         $id_program   = Crypt::decrypt($id_program);
+
+         $kegiatan = DB::table('tb_kegiatan')
+         ->where('id_program', $id_program)
+         ->count();
+
+         if($kegiatan == 0){
+             $update = DB::table('tb_program')->where('id_program', $id_program)->delete();
+                 return Redirect::back()->with(['success' => 'Data Berhasil Dihapus.']);
+             } else {
+                 return Redirect::back()->with(['warning' => 'Data Gagal Dihapus.']);
+             }
+
+     }
+
+
+
 
 
 
