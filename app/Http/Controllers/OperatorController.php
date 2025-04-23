@@ -51,6 +51,7 @@ class OperatorController extends Controller
         $nama        = $request->nama;
         $username    = $request->username;
         $password    = Hash::make($username.'2000');
+        $jenis       = $request->jenis;
         $seksi       = $request->seksi;
 
         $data = [
@@ -58,6 +59,7 @@ class OperatorController extends Controller
             'nama_opt'    => $nama,
             'username'    => $username,
             'password'    => $password,
+            'jenis_opt'  =>  $jenis,
             'status_opt'  => '1',
             'id_seksi'    => $seksi
         ];

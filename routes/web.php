@@ -10,8 +10,11 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\SubkegiatanController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
-Route::get('/', function () {
+Route::get('/admin', function () {
     return view('auth.log-admin');
 });
 
@@ -20,6 +23,8 @@ Route::post('/login_admin', [LoginController::class, 'login_admin']);
 Route::get('/logout', [LoginController::class, 'logout']);
 
 //Level Akun Admin
+
+Route::middleware('auth:admin')->group(function () {
 Route::get('/admin/dashboard', [DashboardController::class, 'view']);
 
 //Crud Seksi/Bidang
@@ -65,3 +70,16 @@ Route::get('/admin/kegiatan/sub{id_keg}', [SubkegiatanController::class, 'view']
 Route::post('/admin/subkeg/store', [SubkegiatanController::class, 'store']);
 Route::post('/admin/subkeg/edit', [SubkegiatanController::class, 'edit']);
 Route::post('/admin/subkeg/{id_subkeg}/update', [SubkegiatanController::class, 'update']);
+
+});
+
+
+//<!------------------- CRUD OPERTOR PENGANGGARAN --------------------->
+//proses login
+Route::get('/', [LoginController::class, 'operator']);
+Route::post('/login_operator', [LoginController::class, 'operator_proses']);
+
+Route::middleware('auth:operator2')->group(function () {
+//dashboard
+Route::get('/opt2/dashboard', [DashboardController::class, 'dashboard_2']);
+});

@@ -78,6 +78,7 @@
                             <th class="text-center">No.</th>
                             <th class="text-center">Nama Lengkap</th>
                             <th class="text-center">Username</th>
+                            <th class="text-center">Jenis / Jabatan</th>
                             <th class="text-center">Seksi</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Aksi</th>
@@ -88,6 +89,11 @@
                             <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $d->nama_opt}}</td>
                             <td>{{ $d->username}}</td>
+                            @if ($d->jenis_opt == '1')
+                            <td> Administrasi Keuangan / LPJ</span></td>
+                            @else
+                            <td> Perencanaan / Penanggaran Keuangan</span></td>
+                            @endif
                             <td>{{ $d->nama_seksi}}</td>
                             @if ($d->status_opt == '0')
                             <td class="text-center"> <span class="badge badge-warning" style="font-size: 12px;">Nonaktif</span></td>
@@ -141,6 +147,19 @@
                                         <div class="input-icon mb-12 col-md-12 col-sm-12">
                                             <span>Username :</span>
                                             <input type="text" maxlength="35" name="username" class="form-control" placeholder="" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"><br></div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="input-icon mb-12 col-md-12 col-sm-12">
+                                            <span>Jenis Operator :</span>
+                                            <select name="jenis" id="jenis" class="form-control" required="required">
+                                                <option value="">Pilih Jenis</option>
+                                                <option value="2"> Perencanaan / Penanggaran Keuangan </option>
+                                                <option value="1"> Administrasi Keuangan / LPJ </option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
