@@ -9,6 +9,8 @@ use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\SubkegiatanController;
+use App\Http\Controllers\AnggaranController;
+use App\Http\Controllers\RanggaranController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
@@ -82,4 +84,17 @@ Route::post('/login_operator', [LoginController::class, 'operator_proses']);
 Route::middleware('auth:operator2')->group(function () {
 //dashboard
 Route::get('/opt2/dashboard', [DashboardController::class, 'dashboard_2']);
+
+//anggaran
+Route::get('/opt2/anggaran', [AnggaranController::class, 'view']);
+Route::get('/opt2/filterkeg/{id_program}', [AnggaranController::class, 'getkegiatan']);
+Route::get('/opt2/filtersub/{id_keg}', [AnggaranController::class, 'getsubkeg']);
+Route::post('/opt2/koderekening/store', [AnggaranController::class, 'koderekening']);
+Route::get('/opt2/anggaran/{id_anggaran}/hapus', [AnggaranController::class, 'hapus']);
+
+Route::post('/opt2/ranggaran/tambah', [RanggaranController::class, 'tambah']);
+Route::post('/opt2/ranggaran/store', [RanggaranController::class, 'store']);
+Route::post('/opt2/ranggaran/edit', [RanggaranController::class, 'edit']);
+
+
 });

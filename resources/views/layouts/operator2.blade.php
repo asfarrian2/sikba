@@ -8,10 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://pap.kalsel.site/assets/foto_profil/sipapan.ico" rel="shortcut icon">
 
-    <title>SIKBA</title>
+    <title>SIKBA {{ Auth::guard('operator2')->user()->ta }}</title>
 
     <!-- Bootstrap -->
     <link href="/gentella/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Font Awesome -->
     <link href="/gentella/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
@@ -55,15 +56,15 @@
           <!-- sidebar menu -->
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
             <div class="menu_section">
-              <h3>HOME</h3>
+              <h3>DASHBOARD</h3>
               <ul class="nav side-menu">
-                <li><a href="/opt2/dashboard"><i class="fa fa-tachometer"></i>Dashboard</a></li>
-                <li><a><i class="fa fa-database"></i> ANGGARAN</a>
-                  </li>
+                <li><a href="/opt2/dashboard"><i class="fa fa-tachometer"></i>DASHBOARD</a></li>
+                <br>
+                <h3>DATA</h3> <br>
+                <li><a href="/opt2/anggaran"><i class="fa fa-database"></i> ANGGARAN</a></li>
                 <br>
                 <h3>OUTPUT</h3> <br>
-                <li><a><i class="fa fa-book"></i> LAPORAN</a>
-                </li>
+                <li><a href="/opt2/laporan"><i class="fa fa-book"></i> LAPORAN</a></li>
               </ul>
             </div>
 
@@ -121,6 +122,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
 
     <script src="/gentella/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     @stack('myscript')
     <!-- Bootstrap -->
     <script src="/gentella/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -179,6 +181,7 @@
     <script src="/gentella/build/js/custom.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
   </body>
 </html>

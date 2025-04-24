@@ -38,7 +38,7 @@ class OperatorController extends Controller
         ->latest('id_opt', 'DESC')
         ->first();
 
-        $kodeobjek ="opt-";
+        $kodeobjek ="1405";
 
         if($operator == null){
             $nomorurut = "001";
