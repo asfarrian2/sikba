@@ -95,6 +95,8 @@ Route::get('/opt2/anggaran/{id_anggaran}/hapus', [AnggaranController::class, 'ha
 Route::post('/opt2/ranggaran/tambah', [RanggaranController::class, 'tambah']);
 Route::post('/opt2/ranggaran/store', [RanggaranController::class, 'store']);
 Route::post('/opt2/ranggaran/edit', [RanggaranController::class, 'edit']);
+Route::post('/opt2/ranggaran/{id_ranggaran}/update', [RanggaranController::class, 'update']);
+Route::get('/opt2/ranggaran/{id_ranggaran}/hapus', [RanggaranController::class, 'hapus']);
 
 
 });

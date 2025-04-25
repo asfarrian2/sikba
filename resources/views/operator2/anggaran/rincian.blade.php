@@ -20,7 +20,7 @@
    <div class="row">
         <div class="col-12">
             <div class="input-icon mb-3 col-md-12 col-sm-6">
-                <span>Pagu Anggaran (Rp) : </span>
+                <span>Harga Satuan (Rp) : </span>
                 <input type="text" name="pagu" id="pagu" class="pagu form-control" required>
             </div>
         </div>

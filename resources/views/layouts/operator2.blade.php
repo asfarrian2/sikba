@@ -46,7 +46,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="/opt2/dashboard" class="site_title"><span>SIKBA</span></a>
+              <a href="/opt2/dashboard" class="site_title"><i class="fa fa-laptop"></i><span> SIK-BALATKOP</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -62,9 +62,6 @@
                 <br>
                 <h3>DATA</h3> <br>
                 <li><a href="/opt2/anggaran"><i class="fa fa-database"></i> ANGGARAN</a></li>
-                <br>
-                <h3>OUTPUT</h3> <br>
-                <li><a href="/opt2/laporan"><i class="fa fa-book"></i> LAPORAN</a></li>
               </ul>
             </div>
 
@@ -110,7 +107,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Copyright &copy; 2024 BALAI PELATIHAN KOPERASI DAN USAHA KECIL PROV. KALIMANTAN SELATAN<a href="https://colorlib.com"></a>
+            Copyright &copy; 2025 BALAI PELATIHAN KOPERASI DAN USAHA KECIL PROV KALIMANTAN SELATAN. PRAKOM<a href="https://colorlib.com"></a>
           </div>
           <div class="clearfix"></div>
         </footer>

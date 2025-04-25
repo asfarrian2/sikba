@@ -143,7 +143,9 @@
                             <th style="background-color: #a1a1a1;" class="text-center">NO.</th>
                             <th style="background-color: #a1a1a1;" class="text-center">KODE REKENING</th>
                             <th style="background-color: #a1a1a1;" class="text-center">NAMA / URAIAN</th>
-                            <th style="background-color: #a1a1a1;" class="text-center">PAGU</th>
+                            <th style="background-color: #a1a1a1;" class="text-center">HARGA SATUAN</th>
+                            <th style="background-color: #a1a1a1;" class="text-center">KOEFESIEN</th>
+                            <th style="background-color: #a1a1a1;" class="text-center">PAGU ANGGARAN</th>
                             <th style="background-color: #a1a1a1;" class="text-center">AKSI</th>
                             </tr>
                         </thead>
@@ -153,6 +155,8 @@
                             <td style="background-color: #cccccc;" class="text-center"><b>{{ $loop->iteration }}</b></td>
                             <td style="background-color: #cccccc;"><b>{{ $d->kode_rekening}}</b></td>
                             <td style="background-color: #cccccc;"><b>{{ $d->nama_rekening}}</b></td>
+                            <td style="background-color: #cccccc;"></td>
+                            <td style="background-color: #cccccc;"></td>
                             <td style="background-color: #cccccc;"><b>Rp <?php echo number_format($d->total_ranggaran ,0,',','.')?></b></td>
                             @csrf
                             <td style="background-color: #cccccc;" class="text-center">
@@ -164,8 +168,10 @@
                             @if ($d->id_anggaran == $r->id_anggaran)
                             <tr>
                                 <td colspan="2" class="text-right">-</td>
-                                <td><b>{{ $r->nama_ranggaran}}</b> <br> Spesifikasi: {{ $r->spesifikasi_ranggaran}} <br> Koefesien: {{$r->koefesien_ranggaran}} {{ $r->satuan_ranggaran}}</td>
-                                <td>Rp <?php echo number_format($r->pagu_ranggaran ,0,',','.')?></td>
+                                <td>{{ $r->nama_ranggaran}} <br> Spesifikasi: <b>{{ $r->spesifikasi_ranggaran}}</b></td>
+                                <td>Rp <?php echo number_format($r->harga_ranggaran ,0,',','.')?></td>
+                                <td>{{ $r->koefesien_ranggaran}} {{ $r->satuan_ranggaran}}</td>
+                                <td><b>Rp <?php echo number_format($r->pagu_ranggaran ,0,',','.')?></b></td>
                                 <td class="text-center">
                                     <a class="editr" href="#" data-id="{{ Crypt::encrypt($r->id_ranggaran) }}" title="Edit Rincian"><i class="fa fa-pencil text-succsess btn btn-warning btn-sm" ></i></a>
                                      <a class="hapusr" href="#" data-id="{{ Crypt::encrypt($r->id_ranggaran) }}" title="Hapus Data"><i class="fa fa-trash text-succsess btn btn-danger btn-sm" ></i></a>
@@ -235,7 +241,7 @@
                             <button type="button" class="fa fa-close close" data-bs-dismiss="modal"></button>
                         </div>
                         <div class="modal-body" id="loadtambahrincian">
-                            {{-- ***Form Edit*** --}}
+                            {{-- ***Form tambah*** --}}
                         </div>
                     </div>
                 </div>
@@ -355,6 +361,25 @@
     }).then((result) => {
       if (result.isConfirmed) {
         window.location = "/opt2/anggaran/"+id_anggaran+"/hapus"
+      }
+    });
+    });
+</script>
+
+<script>
+    $('.hapusr').click(function(){
+        var id_ranggaran = $(this).attr('data-id');
+    Swal.fire({
+      title: "Apakah Anda Yakin Data Ini Ingin Di Hapus ?",
+      text: "Jika Ya Maka Data Akan Terhapus Permanen",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, Hapus Saja!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location = "/opt2/ranggaran/"+id_ranggaran+"/hapus"
       }
     });
     });

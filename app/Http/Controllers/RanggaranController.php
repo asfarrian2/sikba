@@ -29,7 +29,7 @@ class RanggaranController extends Controller
 
         $ranggaran=DB::table('tb_ranggaran')
         ->where('id_anggaran', $id_anggaran)
-        ->latest('id_anggaran', 'DESC')
+        ->latest('id_ranggaran', 'DESC')
         ->first();
 
         $kodeobjek ="R-";
@@ -48,14 +48,16 @@ class RanggaranController extends Controller
         $pagu          = str_replace('.','', $pagu);
         $koefesien     = $request->koefesien;
         $satuan        = $request->satuan;
+        $total         = $pagu*$koefesien;
 
         $data = [
             'id_ranggaran'          => $id,
             'nama_ranggaran'        => $nama,
             'spesifikasi_ranggaran' => $spesifikasi,
-            'pagu_ranggaran'        => $pagu,
+            'harga_ranggaran'       => $pagu,
             'koefesien_ranggaran'   => $koefesien,
             'satuan_ranggaran'      => $satuan,
+            'pagu_ranggaran'        => $total,
             'id_anggaran'           => $id_anggaran
         ];
         $simpan = DB::table('tb_ranggaran')->insert($data);
@@ -67,7 +69,38 @@ class RanggaranController extends Controller
 
     }
 
-        //Edit Data
+    //Update Data
+    public function update($id_ranggaran, Request $request)
+    {
+        $id_ranggaran = Crypt::decrypt($id_ranggaran);
+        $nama          = $request->nama;
+        $spesifikasi   = $request->spesifikasi;
+        $pagu          = $request->pagu;
+        $pagu          = str_replace('.','', $pagu);
+        $koefesien     = $request->koefesien;
+        $satuan        = $request->satuan;
+        $total         = $pagu*$koefesien;
+
+        $data = [
+        'nama_ranggaran'        => $nama,
+        'spesifikasi_ranggaran' => $spesifikasi,
+        'harga_ranggaran'       => $pagu,
+        'koefesien_ranggaran'   => $koefesien,
+        'satuan_ranggaran'      => $satuan,
+        'pagu_ranggaran'        => $total
+         ];
+
+         $update = DB::table('tb_ranggaran')->where('id_ranggaran', $id_ranggaran)->update($data);
+         if($update){
+         return Redirect::back()->with(['success' => 'Data Berhasil Diubah.']);
+         }else{
+         return Redirect::back()->with(['warning' => 'Data Gagal Diubah.']);
+         }
+
+    }
+
+
+    //Edit Data
     public function edit(Request $request)
     {
         $id_ranggaran = $request->id_ranggaran;
@@ -79,6 +112,25 @@ class RanggaranController extends Controller
 
         return view('operator2.anggaran.editr', compact('id_ranggaran', 'ranggaran'));
     }
+
+
+    //Hapus Data
+     public function hapus($id_ranggaran)
+     {
+         $id_ranggaran   = Crypt::decrypt($id_ranggaran);
+
+        //  $ranggaran = DB::table('tb_ranggaran')
+        //  ->where('id_ranggaran', $id_ranggaran)
+        //  ->count();
+
+        $delate = DB::table('tb_ranggaran')->where('id_ranggaran', $id_ranggaran)->delete();
+        if($delate){
+            return Redirect::back()->with(['success' => 'Data Berhasil Dihapus.']);
+        } else {
+            return Redirect::back()->with(['warning' => 'Data Gagal Dihapus.']);
+        }
+
+     }
 
 
 }

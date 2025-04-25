@@ -1,4 +1,4 @@
-<form action="/opt2/ranggaran/update" method="POST" id="frmTambah" enctype="multipart/form-data">
+<form action="/opt2/ranggaran/{{Crypt::encrypt($ranggaran->id_ranggaran)}}/update" method="POST" id="frmTambah" enctype="multipart/form-data">
     @csrf
    <div class="row">
        <div class="col-12">
@@ -19,8 +19,8 @@
    <div class="row">
         <div class="col-12">
             <div class="input-icon mb-3 col-md-12 col-sm-6">
-                <span>Pagu Anggaran (Rp) : </span>
-                <input type="text" value="{{ $ranggaran->pagu_ranggaran}}" name="pagu" id="pagu" class="pagu form-control" required>
+                <span>Harga Satuan (Rp) : </span>
+                <input type="text" value="{{ $ranggaran->harga_ranggaran}}" name="pagu" id="pagu" class="pagu form-control" required>
             </div>
         </div>
     </div>
